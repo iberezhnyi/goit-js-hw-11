@@ -8,7 +8,9 @@ export function cardTemplate({
   downloads,
 }) {
   return `<div class="photo-card">
-  <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+  <a href="${largeImageURL}" class="gallery__photo-link">
+    <img class="gallery__image" src="${webformatURL}" alt="${tags}" loading="lazy" />
+  </a>
   <div class="info">
     <p class="info-item">
       <b>Likes: ${likes}</b>
@@ -23,5 +25,5 @@ export function cardTemplate({
       <b>Downloads: ${downloads}</b>
     </p>
   </div>
-</div>`;
+  </div>`;
 }

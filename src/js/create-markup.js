@@ -1,5 +1,5 @@
 import { cardTemplate } from '../templates/card-temlate';
 
-export function createMarkup(data) {
+export default data => {
   return data.map(cardTemplate).join('');
-}
+};
