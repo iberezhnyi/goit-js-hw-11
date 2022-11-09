@@ -1,4 +1,3 @@
-import './css/styles.css';
 import simpleLightbox from './js/simple-lightbox';
 import { notifyInfo, notifySuccess } from './js/notifications';
 import refs from './js/refs';

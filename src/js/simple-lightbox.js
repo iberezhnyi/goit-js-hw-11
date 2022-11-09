@@ -7,4 +7,7 @@ const options = {
   captionDelay: 250,
 };
 
-export default new SimpleLightbox('.gallery .gallery__photo-link', options);
+export default new SimpleLightbox(
+  '.gallery .gallery-card__photo-link',
+  options
+);
