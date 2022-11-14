@@ -1,6 +1,6 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-export { notifyInfo, notifySuccess };
+export { notifyInfo, notifySuccess, notifyFailure };
 
 const notifyInfo = () =>
   Notify.info(
@@ -9,3 +9,5 @@ const notifyInfo = () =>
 
 const notifySuccess = totalHits =>
   Notify.success(`Hooray! We found ${totalHits} images.`);
+
+const notifyFailure = () => Notify.failure('Something went wrong :(');

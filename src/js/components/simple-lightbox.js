@@ -8,6 +8,6 @@ const options = {
 };
 
 export default new SimpleLightbox(
-  '.gallery .gallery-card__photo-link',
+  '.gallery .gallery-card__image-link',
   options
 );

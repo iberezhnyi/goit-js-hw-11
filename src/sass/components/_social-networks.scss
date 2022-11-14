@@ -1,0 +1,35 @@
+.social-network {
+  text-align: center;
+}
+
+.social-network__list {
+  display: inline-flex;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.social-network__link {
+  @include custom-flex;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 5px;
+
+  background-color: var(--accent-color);
+  fill: var(--primary-bg-color);
+
+  &:hover .social-network__icon,
+  &:focus .social-network__icon {
+    transform: scale(1.5);
+  }
+}
+
+.social-network__icon {
+  width: 20px;
+  height: 20px;
+
+  transition: transform var(--time-animation-function);
+}

@@ -1,14 +1,49 @@
-import simpleLightbox from './js/simple-lightbox';
-import { notifyInfo, notifySuccess } from './js/notifications';
-import refs from './js/refs';
-import SearchServiceApi from './js/search-service-api';
-import createMarkup from './js/create-markup';
-import smoothScroll from './js/smooth-scroll';
+import simpleLightbox from './js/components/simple-lightbox';
+import {
+  notifyInfo,
+  notifySuccess,
+  notifyFailure,
+} from './js/components/notifications';
+import refs from './js/components/refs';
+import SearchServiceApi from './js/components/search-service-api';
+import createMarkup from './js/components/create-markup';
+import smoothScroll from './js/components/smooth-scroll';
+import LoadMoreBtn from './js/components/load-more-btn';
+import appendGalleryMarkup from './js/components/append-gallery-markup';
+import clearGallaryContainer from './js/components/clear-gallary-container';
+import getStartRandomCardsArray from './js/components/get-start-random-cards-array';
 
+const loadMoreBtn = new LoadMoreBtn({
+  selector: '.load-more__btn',
+  hidden: true,
+});
 const searchServiceApi = new SearchServiceApi();
+const startSearchServiceApi = new SearchServiceApi(200, 'photo');
+startFetchImagesAndUpdateUI();
 
 refs.form.addEventListener('submit', onFormSubmit);
-refs.btnLoadMore.addEventListener('click', onLoadMore);
+loadMoreBtn.refs.button.addEventListener('click', fetchImagesAndUpdateUI);
+
+async function startFetchImagesAndUpdateUI() {
+  try {
+    const startResponse = await startSearchServiceApi.fetchImages();
+
+    if (!startResponse.hits.length) {
+      notifyInfo();
+      return;
+    }
+
+    const randomCardArray = getStartRandomCardsArray(startResponse.hits);
+    const startGalleryMarkup = createMarkup(randomCardArray);
+
+    appendGalleryMarkup(startGalleryMarkup);
+
+    simpleLightbox.refresh();
+  } catch (error) {
+    notifyFailure();
+    console.error(error);
+  }
+}
 
 function onFormSubmit(e) {
   const inputValue = e.currentTarget.elements.searchQuery.value.trim();
@@ -21,14 +56,14 @@ function onFormSubmit(e) {
 
   searchServiceApi.resetPage();
 
-  fetchImagesAndUpdateUI();
-}
+  loadMoreBtn.show();
 
-function onLoadMore() {
   fetchImagesAndUpdateUI();
 }
 
 async function fetchImagesAndUpdateUI() {
+  loadMoreBtn.disable();
+
   try {
     const response = await searchServiceApi.fetchImages();
 
@@ -46,15 +81,10 @@ async function fetchImagesAndUpdateUI() {
     simpleLightbox.refresh();
 
     smoothScroll();
+
+    loadMoreBtn.enable();
   } catch (error) {
+    notifyFailure();
     console.error(error);
   }
-}
-
-function appendGalleryMarkup(markup) {
-  refs.gallery.insertAdjacentHTML('beforeend', markup);
-}
-
-function clearGallaryContainer() {
-  refs.gallery.innerHTML = '';
 }

@@ -5,7 +5,7 @@ export default () => {
     refs.gallery.firstElementChild.getBoundingClientRect();
 
   window.scrollBy({
-    top: cardHeight * 2,
+    top: cardHeight * 0.195,
     behavior: 'smooth',
   });
 };
