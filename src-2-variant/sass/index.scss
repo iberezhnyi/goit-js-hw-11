@@ -1,0 +1,12 @@
+@import './utils/vars';
+@import './utils/mixins';
+
+@import './base/common';
+@import './base/reset';
+
+@import './components/load-more-btn';
+@import './components/social-networks';
+
+@import './layout/search-section';
+@import './layout/gallery-section';
+@import './layout/footer-section';

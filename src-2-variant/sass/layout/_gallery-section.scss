@@ -1,0 +1,79 @@
+.section-gallery {
+  padding-top: 15px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin: -15px;
+}
+
+.gallery-card {
+  margin: 15px;
+
+  &__image-link {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  &__image {
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+      0px 2px 1px rgba(0, 0, 0, 0.2);
+
+    transition: transform var(--time-animation-function);
+  }
+
+  &:hover &__image {
+    transform: scale(1.03);
+  }
+
+  &__info-item:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  &__info-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__info-icon::before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+
+    margin-right: 5px;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    transition: transform var(--time-animation-function);
+  }
+
+  &:hover &__info-icon::before {
+    transform: scale(1.3);
+  }
+
+  &__info-icon--heart::before {
+    background-image: url('../images/icons/heart.svg');
+  }
+
+  &__info-icon--views::before {
+    background-image: url('../images/icons/views.svg');
+  }
+
+  &__info-icon--download::before {
+    background-image: url('../images/icons/download.svg');
+  }
+
+  &__info-icon--comment::before {
+    background-image: url('../images/icons/comment.svg');
+  }
+}
