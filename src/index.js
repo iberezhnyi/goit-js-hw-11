@@ -85,6 +85,7 @@ async function fetchImagesAndUpdateUI() {
     loadMoreBtn.enable();
   } catch (error) {
     notifyFailure();
+
     console.error(error);
   }
 }
